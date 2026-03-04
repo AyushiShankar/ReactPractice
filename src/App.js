@@ -2,7 +2,8 @@
 // import ColorExplorer from "./components/colorExplorer/ColorExplorer";
 // import ContactForm from "./components/ContactForm/ContactForm";
 // import AgeCalculator from "./components/AgeCalculator/AgeCalculator";
-import ReadMoreToggle from "./components/ReadMoreToggle/ReadMoreToggle";
+// import ReadMoreToggle from "./components/ReadMoreToggle/ReadMoreToggle";
+import ConfirmationModal from "./components/ConfirmationModal/ConfirmationModal";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       {/* <ColorExplorer />
       <ContactForm /> */}
       {/* <AgeCalculator /> */}
-      <ReadMoreToggle />
+      {/* <ReadMoreToggle /> */}
+      <ConfirmationModal />
     </main>
   );
 }
