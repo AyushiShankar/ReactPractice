@@ -5,7 +5,8 @@
 // import ReadMoreToggle from "./components/ReadMoreToggle/ReadMoreToggle";
 // import ConfirmationModal from "./components/ConfirmationModal/ConfirmationModal";
 // import URLValidator from "./components/ValidateURL/URLValidator";
-import PasswordStrength from "./components/PasswrdStrength/PasswordStrength";
+// import PasswordStrength from "./components/PasswrdStrength/PasswordStrength";
+import ProgressBar from "./components/ProgressBar/ProgressBar";
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
       <ContactForm /> 
       <AgeCalculator /> 
       <ReadMoreToggle />
-      <ConfirmationModal /> */}
-      <PasswordStrength />
+      <ConfirmationModal /> 
+      <PasswordStrength /> */}
+      <ProgressBar />
     </main>
   );
 }
