@@ -1,0 +1,34 @@
+.blog-post {
+    font-family: sans-serif;
+    padding: 2rem;
+}
+
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.post-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #efefef;
+}
+
+.post-tag {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 2px 6px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: blue;
+
+}
+
+.reaction {
+    margin-top: 10px;
+    color: #555;
+    font-size: 0.9rem;
+}
