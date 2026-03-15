@@ -1,75 +1,84 @@
 import React, { useState } from "react";
-import style from "./AgeCalculator.module.css";
+import "./styles.css";
 
 function AgeCalculator() {
   const [date, setDate] = useState("");
-  const [result, setResult] = useState(false);
-  const [message, setMessage] = useState(null);
+  const [result, setResult] = useState("");
+  const [age, setAge] = useState(null);
 
   function calculateDate(value) {
-    setMessage("");
-    const d2 = new Date();
-    const d1 = new Date(value);
-    console.log(date);
+    setResult("");
 
     if (!value) {
-      setResult(false);
-      setMessage("Please select a date");
+      setAge(null);
+      setResult("Please select a date");
       return;
     }
+
+    const d2 = new Date();
+    const d1 = new Date(value);
 
     if (d1 > d2) {
-      setResult(false);
-      setMessage("Birthdate cannot be in the future");
-      return;
-    } else {
-      let years = d2.getFullYear() - d1.getFullYear();
-      let months = d2.getMonth() - d1.getMonth();
-      let days = d2.getDate() - d1.getDate();
-
-      if (days < 0) {
-        months--;
-        days += new Date(d2.getFullYear(), d2.getMonth(), 0).getDate();
-      }
-      if (months < 0) {
-        years -= 1;
-        months += 12;
-      }
-      setResult(true);
-      setMessage({years, months, days});
+      setAge(null);
+      setResult("Birthdate cannot be in the future");
       return;
     }
+
+    let years = d2.getFullYear() - d1.getFullYear();
+    let months = d2.getMonth() - d1.getMonth();
+    let days = d2.getDate() - d1.getDate();
+
+    if (days < 0) {
+      months--;
+      days += new Date(d2.getFullYear(), d2.getMonth(), 0).getDate();
+    }
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+
+    setAge({ years, months, days });
   }
 
   return (
-    <div className={style.conatiner}>
-      <h2 className={style.title}>Age Calculator</h2>
-      <label className={style.label} data-testid="label-birthdate">
+    <div className="container">
+      <h2 className="title">Age Calculator</h2>
+
+      <label
+        htmlFor="birthdate"
+        className="label"
+        data-testid="label-birthdate"
+      >
         Enter/Select a birthdate:
       </label>
+
       <input
         id="birthdate"
         type="date"
-        className={style["input-date"]}
+        className="input-date"
         data-testid="input-birthdate"
-        onChange={(e) => setDate(e.target.value)}
         value={date}
+        onChange={(e) => setDate(e.target.value)}
       />
+
       <button
-        className={style["btn-calc"]}
+        type="button"
+        className="btn-calc"
         data-testid="btn-calculate"
         onClick={() => calculateDate(date)}
       >
         Calculate Age
       </button>
-      {!result && (
-        <p className={style["error-msg"]} data-testid="error-msg">
-          {message}
+
+      {result && (
+        <p className="error-msg" data-testid="error-msg">
+          {result}
         </p>
       )}
-      {result && (
-        <p className={style["age-result"]} data-testid="age-result">
-          {message.years} years, {message.months} months, {message.days} days
+
+      {!result && age && (
+        <p className="age-result" data-testid="age-result">
+          {age.years} years, {age.months} months, {age.days} days
         </p>
       )}
     </div>
