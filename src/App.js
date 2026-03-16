@@ -1,29 +1,9 @@
-// import AutoSaveInput from "./components/AutoSaveInput";
-// import ColorExplorer from "./components/colorExplorer/ColorExplorer";
-// import ContactForm from "./components/ContactForm/ContactForm";
-// import AgeCalculator from "./components/AgeCalculator/AgeCalculator";
-// import ReadMoreToggle from "./components/ReadMoreToggle/ReadMoreToggle";
-// import ConfirmationModal from "./components/ConfirmationModal/ConfirmationModal";
-// import URLValidator from "./components/ValidateURL/URLValidator";
-// import PasswordStrength from "./components/PasswrdStrength/PasswordStrength";
-// import ProgressBar from "./components/ProgressBar/ProgressBar";
-      import Counter from './components/UsePreviousHook/counter';
+import AcronymGenerator from "./components/AcronymGenerator/AcronymGenerator";
 
-function App() {
+export default function App() {
   return (
-    <main>
-      {/* <AutoSaveInput />
-      <ColorExplorer />
-      <ContactForm /> 
-      <AgeCalculator /> 
-      <ReadMoreToggle />
-      <ConfirmationModal /> 
-      <PasswordStrength /> 
-      <ProgressBar />*/}
-
-      <Counter />
-    </main>
+    <div className="App">
+      <AcronymGenerator />
+    </div>
   );
 }
-
-export default App;
