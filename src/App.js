@@ -6,7 +6,8 @@
 // import ConfirmationModal from "./components/ConfirmationModal/ConfirmationModal";
 // import URLValidator from "./components/ValidateURL/URLValidator";
 // import PasswordStrength from "./components/PasswrdStrength/PasswordStrength";
-import ProgressBar from "./components/ProgressBar/ProgressBar";
+// import ProgressBar from "./components/ProgressBar/ProgressBar";
+      import Counter from './components/UsePreviousHook/counter';
 
 function App() {
   return (
@@ -17,8 +18,10 @@ function App() {
       <AgeCalculator /> 
       <ReadMoreToggle />
       <ConfirmationModal /> 
-      <PasswordStrength /> */}
-      <ProgressBar />
+      <PasswordStrength /> 
+      <ProgressBar />*/}
+
+      <Counter />
     </main>
   );
 }

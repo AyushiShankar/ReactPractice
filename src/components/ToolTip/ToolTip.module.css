@@ -1,0 +1,41 @@
+.tooltip-container {
+  display: flex;
+  gap: 24px;
+  font-size: 28px;
+  padding: 50px;
+  justify-content: center;
+}
+
+.tooltip-item {
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.tooltip-item:hover {
+  transform: scale(1.1);
+}
+
+.tooltip-box {
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

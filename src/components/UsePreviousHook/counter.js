@@ -1,15 +1,12 @@
-import "./styles.css";
 import { useState } from "react";
-import usePrevious from "./usePrevious";
+import usePrevious from "./usePreviousHook";
 
 export default function Counter() {
-
   const [current, setCurrent] = useState(0);
   const previousCount = usePrevious(current);
 
   const handleDec = () => {
     return setCurrent((prev) => prev - 1);
-
   };
   const handleIn = () => {
     return setCurrent((prev) => prev + 1);
@@ -17,7 +14,6 @@ export default function Counter() {
 
   const handleReset = () => {
     return setCurrent(0);
-
   };
   return (
     <div className="App">
