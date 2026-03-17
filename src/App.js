@@ -1,9 +1,5 @@
-import AcronymGenerator from "./components/AcronymGenerator/AcronymGenerator";
+import Greeting from "./components/Greeting/Greeting";
 
 export default function App() {
-  return (
-    <div className="App">
-      <AcronymGenerator />
-    </div>
-  );
+  return <Greeting />;
 }

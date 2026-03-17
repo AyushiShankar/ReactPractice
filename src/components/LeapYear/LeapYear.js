@@ -7,13 +7,12 @@ export default function LeapYear() {
 
   function handleYear(value) {
     setMessage("");
-    if (!value) { return setMessage("Please enter a year") }
-    else if (value % 400 === 0 || (value % 4 === 0 && value % 100 != 0)) {
+    if (!value) {
+      return setMessage("Please enter a year");
+    } else if (value % 400 === 0 || (value % 4 === 0 && value % 100 !== 0)) {
       setIsLeap(true);
       setMessage(`${year} is a Leap Year`);
-
-    }
-    else {
+    } else {
       setIsLeap(false);
       setMessage(`${year} is not a Leap Year`);
     };
