@@ -1,5 +1,4 @@
-import Greeting from "./components/Greeting/Greeting";
-
+import ChipsInput from "./components/ChipsInput/ChipsInput";
 export default function App() {
-  return <Greeting />;
+  return <ChipsInput />;
 }
