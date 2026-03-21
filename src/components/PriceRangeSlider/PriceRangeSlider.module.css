@@ -1,0 +1,87 @@
+.slider-container {
+  width: 90%;
+  max-width: 500px;
+  margin: 3rem auto;
+  font-family: sans-serif;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #fafafa;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 20px;
+}
+
+.inputs input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.slider-track {
+  position: relative;
+  height: 6px;
+  background-color: #ddd;
+  border-radius: 3px;
+  margin: 40px 0;
+}
+
+.slider-active-range {
+  position: absolute;
+  height: 100%;
+  background-color: #007bff;
+  border-radius: 3px;
+  z-index: 2;
+}
+
+.thumb {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 6px;
+  background: none;
+  appearance: none;
+  top: 0;
+}
+
+/* Enables pointer interaction only on the thumb handle */
+.thumb::-webkit-slider-thumb {
+  pointer-events: all;
+  appearance: none;
+  height: 18px;
+  width: 18px;
+  background: #007bff;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  position: relative;
+}
+
+/* Ensure min slider is always on top to be draggable */
+.thumb--left {
+  z-index: 4;
+}
+
+.thumb--right {
+  z-index: 3;
+}
+
+.slider-label {
+  position: absolute;
+  top: -30px;
+  transform: translateX(-50%);
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  white-space: nowrap;
+  z-index: 5;
+}
