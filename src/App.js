@@ -1,5 +1,4 @@
-// import ChipsInput from "./components/ChipsInput/ChipsInput";
-import Accordion from "./components/Accordion/Accordion";
+import HolyGrail from "./components/HolyGrail/HolyGrail";
 export default function App() {
-  return <Accordion />;
+  return <HolyGrail />;
 }
