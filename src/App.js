@@ -1,4 +1,5 @@
-import ChipsInput from "./components/ChipsInput/ChipsInput";
+// import ChipsInput from "./components/ChipsInput/ChipsInput";
+import Accordion from "./components/Accordion/Accordion";
 export default function App() {
-  return <ChipsInput />;
+  return <Accordion />;
 }
