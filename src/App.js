@@ -1,4 +1,4 @@
-import LuckyNumber from "./components/LuckyNumber/LuckyNumber";
+import Slugify from "./components/Slugify/Slugify";
 export default function App() {
-  return <LuckyNumber />;
+  return <Slugify />;
 }
