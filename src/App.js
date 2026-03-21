@@ -1,4 +1,4 @@
-import HolyGrail from "./components/HolyGrail/HolyGrail";
+import LuckyNumber from "./components/LuckyNumber/LuckyNumber";
 export default function App() {
-  return <HolyGrail />;
+  return <LuckyNumber />;
 }
