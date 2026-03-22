@@ -1,9 +1,10 @@
-import ResizableSplitPane from "./components/ResizableSplitPane/ResizableSplitPane";
-
-export default function App() {
+import ProductRatingHeatmap from "./components/ProductRatingHeatmap/ProductRatingHeatmap";
+function App() {
   return (
-    <div className="App">
-      <ResizableSplitPane />
+    <div className="app-wrapper">
+      <ProductRatingHeatmap />
     </div>
   );
 }
+
+export default App;
