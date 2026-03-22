@@ -1,10 +1,7 @@
-import ProductRatingHeatmap from "./components/ProductRatingHeatmap/ProductRatingHeatmap";
+import PaginatedBookmarkList from "./components/PaginatedBookmarkList/PaginatedBookmarkList";
+
 function App() {
-  return (
-    <div className="app-wrapper">
-      <ProductRatingHeatmap />
-    </div>
-  );
+  return <PaginatedBookmarkList />;
 }
 
 export default App;
