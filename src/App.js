@@ -1,4 +1,9 @@
-import Slugify from "./components/Slugify/Slugify";
+import ResizableSplitPane from "./components/ResizableSplitPane/ResizableSplitPane";
+
 export default function App() {
-  return <Slugify />;
+  return (
+    <div className="App">
+      <ResizableSplitPane />
+    </div>
+  );
 }

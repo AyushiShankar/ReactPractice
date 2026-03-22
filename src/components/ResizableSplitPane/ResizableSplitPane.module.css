@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  width: 100%;
+  height: 300px;
+  user-select: none;
+}
+
+.divider {
+  width: 5px;
+  background-color: #999;
+  cursor: e-resize;
+}
+
+.left-pane {
+  background: #f0f0f0;
+  min-width: 100px;
+  width: 200px;
+}
+
+.right-pane {
+  background: #e0e0ff;
+
+}
