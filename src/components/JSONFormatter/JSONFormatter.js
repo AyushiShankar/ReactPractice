@@ -1,39 +1,55 @@
-// JSONFormatter.js
+// App.js
 import React, { useState } from "react";
+import "./styles.css";
 
-export default function JSONFormatter() {
+
+export default function App() {
   const [input, setInput] = useState("");
   const [formatted, setFormatted] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   const handleFormat = (value) => {
-    if (handleValidate(value)) {
+    const parsedValue = handleValidate(value);
+    if (parsedValue) {
       setError("");
       setSuccess("");
-      const formatJSON = JSON.stringify(value, null, 2);
+      const formatJSON = JSON.stringify(parsedValue, null, 2);
       setFormatted(formatJSON);
-      setSuccess("JSON formatted successfully");
+      setSuccess("JSON formatted successfully!");
     }
   };
 
   const handleValidate = (value) => {
-    if (!value.trim() || !JSON.parse(value)) {
+    if (!value.trim()) {
       setError("Invalid JSON: Unexpected token...");
-      return false;
-    } else {
-      setSuccess("Valid JSON");
-      return true;
+      setFormatted("");
+      setSuccess("");
+      return null;
+    }
+
+    try {
+      const parsedValue = JSON.parse(value);
+      setError("");
+      setFormatted("");
+      setSuccess("Valid JSON!");
+      return parsedValue;
+    } catch {
+      setError("Invalid JSON: Unexpected token...");
+      setFormatted("");
+      setSuccess("");
+      return null;
     }
   };
 
   const handleMinify = (value) => {
-    if (handleValidate(value)) {
+    const parsedValue = handleValidate(value);
+    if (parsedValue) {
       setError("");
       setSuccess("");
-      const formatJSON = JSON.stringify(value);
+      const formatJSON = JSON.stringify(parsedValue);
       setFormatted(formatJSON);
-      setSuccess("JSON minified successfully");
+      setSuccess("JSON minified successfully!");
     }
   };
 
@@ -71,8 +87,9 @@ export default function JSONFormatter() {
           Clear
         </button>
       </span>
-      {error ? <p data-testid="error-message">{error}</p> : <p data-testid="success-message">{success}</p>}
-      {!error && formatted && <p data-testid="formatted-message">{formatted}</p>}
+      {error && <p data-testid="error-message">{error}</p>}
+      {success && <p data-testid="success-message">{success}</p>}
+      {!error && formatted && <p data-testid="formatted-output">{formatted}</p>}
       {/* TODO: Show formatted output */}
     </div>
   );
