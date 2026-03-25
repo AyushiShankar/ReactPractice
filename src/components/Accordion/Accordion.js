@@ -1,54 +1,64 @@
 import React, { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import './Accordian.module.css';
+import { useNavigate } from "react-router-dom";
 
+function Accordion() {
+  const navigate = useNavigate();
+  const items = [
+    {
+      title: "JavaScript Basics",
+      content: "Learn variables, functions, and loops in JavaScript.",
+    },
+    {
+      title: "React.js Overview",
+      content: "Understand components, state, and props in React.",
+    },
+    {
+      title: "Node.js",
+      content: "Basics of server-side development with Node.js.",
+    },
+    {
+      title: "Full-Stack Development",
+      content: "Build full-stack apps with React and Node.js.",
+    },
+  ];
+  const [isOpen, setIsOpen] = useState(false);
+  function handleAccordian(index) {
+    setIsOpen((prev) => (prev === index ? null : index));
+  }
+  if (!items || items.length === 0) {
+    return <p>No items available.</p>;
+  }
+  const handleRoute = () => {
+    navigate("/PaginatedBookmarkList");
+  };
 
+  return (
+    <div className="accordion">
+      {items.map((item, index) => (
+        <div className="accordion-item" key={index}>
+          <button
+            className="accordion-title"
+            onClick={() => handleAccordian(index)}
+          >
+            {item.title}
+            {isOpen === index ? (
+              <FaChevronUp style={{ float: "right" }} />
+            ) : (
+              <FaChevronDown style={{ float: "right" }} />
+            )}
+          </button>
 
-function Accordion( ) {
+          {isOpen === index && (
+            <p className="accordion-content">{item.content}</p>
+          )}
+        </div>
+      ))}
 
-    const items = [
-  {
-    title: "JavaScript Basics",
-    content: "Learn variables, functions, and loops in JavaScript."
-  },
-  {
-    title: "React.js Overview",
-    content: "Understand components, state, and props in React."
-  },
-  {
-    title: "Node.js",
-    content: "Basics of server-side development with Node.js."
-  },
-  {
-    title: "Full-Stack Development",
-    content: "Build full-stack apps with React and Node.js."
-  },
-];
-    const [isOpen, setIsOpen] = useState(false);
-    function handleAccordian(index) {
-
-        setIsOpen((prev) => (prev === index) ? null : index);
-
-    }
-    if (!items || items.length === 0) {
-        return <p>No items available.</p>;
-    }
-    return (
-        <div className="accordion">
-
-            {items.map((item, index) =>
-                <div className="accordion-item" key={index}>
-                    <button className="accordion-title" onClick={() => handleAccordian(index)}>{item.title}
-                        {isOpen === index ? <FaChevronUp style={{ float: 'right' }} /> : <FaChevronDown style={{ float: 'right' }} />}
-                    </button>
-
-                    {isOpen === index && <p className="accordion-content">{item.content}</p>}
-
-
-                </div>)
-            }
-        </div >
-    );
+      <button onClick={handleRoute}>Continue</button>
+    </div>
+  );
 }
 
 export default Accordion;

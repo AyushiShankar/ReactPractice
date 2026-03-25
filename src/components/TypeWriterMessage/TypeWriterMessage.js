@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./styles.css";
 
 const messages = [
@@ -15,26 +15,44 @@ export function TypeWriterMessage() {
   const [isTyping, setIsTyping] = useState(false);
   const [showSkip, setShowSkip] = useState(false);
 
-  const startTyping = () => {
-    setDisplayedText(messages[{currentMessageIndex}]);
-    setIsTyping((prev)=>!prev);
-  };
+  const currentMessage = messages[currentMessageIndex] ?? "";
 
-  const skipTyping = () => {
-    setShowSkip((prev)=> !prev);
-}
+  const startTyping = useCallback(() => {
+    setIsTyping(true);
+    setShowSkip(true);
+    setDisplayedText("");
+  }, []);
 
-  const nextMessage = () => {
-    setCurrentMessageIndex((prev)=> prev+1);
-    setDisplayedText(messages[{currentMessageIndex}]);
-  };
+  const skipTyping = useCallback(() => {
+    setDisplayedText(currentMessage);
+    setIsTyping(false);
+    setShowSkip(false);
+  }, []);
+
+  const nextMessage = useCallback(() => {
+    if (isTyping) return;
+    setCurrentMessageIndex((prev) => (prev + 1) % messages.length);
+    setDisplayedText("");
+    setIsTyping(false);
+    setShowSkip(false);
+  }, []);
 
   useEffect(() => {
-    setInterval(()=> {
-        setDisplayedText(messages[{currentMessageIndex}],1000)
+    if (!isTyping) return;
+    let charIndex = 0;
+    setDisplayedText("");
 
-    })
-  }, [currentMessageIndex]);
+    const interval = setInterval(() => {
+      if (charIndex <= currentMessage.length) {
+        setDisplayedText((prev) => prev + currentMessage.charAt(charIndex));
+        charIndex += 1;
+      } else {
+        setIsTyping(false);
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [currentMessage, isTyping]);
 
   return (
     <div className="typewriter-container">
@@ -46,8 +64,12 @@ export function TypeWriterMessage() {
       </div>
 
       <div className="controls">
-        <button onClick={startTyping} className={isTyping ? "start-button disabled" : "start-button"}>
-          Start
+        <button
+          onClick={startTyping}
+          className={isTyping ? "start-button disabled" : "start-button"}
+          disabled={isTyping}
+        >
+          Start Typing
         </button>
 
         {showSkip && (
@@ -56,8 +78,12 @@ export function TypeWriterMessage() {
           </button>
         )}
 
-        <button onClick={nextMessage} className={isTyping ? "next-button disabled" : "next-button"}>
-          Next
+        <button
+          onClick={nextMessage}
+          className={isTyping ? "next-button disabled" : "next-button"}
+          disabled={isTyping}
+        >
+          Next Message
         </button>
       </div>
 
