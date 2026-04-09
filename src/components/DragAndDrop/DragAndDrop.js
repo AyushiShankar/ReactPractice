@@ -159,7 +159,7 @@ export default function KanbanBoard() {
                       if (e.key === "Enter") {
                         enterPressedRef.current = true;
                         addNewTaskInline(col);
-                        e.target.blur();
+                        e.target.blur();        
                       }
                     }}
                     autoFocus /> :
