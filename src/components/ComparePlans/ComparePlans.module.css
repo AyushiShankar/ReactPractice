@@ -1,0 +1,145 @@
+.body{
+    margin: 0;
+    padding: 0;
+    font-family: Poppins;
+}
+
+.CmprPlns {
+    margin-left: 140px;
+    margin-right: 140px;
+
+}
+
+.headerRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.cmprPlnHdr {
+    text-align: center;
+    padding: 16px 0 0 0;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 500;
+    color: #264A9F;
+    margin: 0 auto;
+    margin-bottom: 40px;
+
+}
+
+.planTypeContainers{
+display: flex;
+  flex-wrap: wrap;
+margin-bottom: 24px;  
+
+}   
+  
+.planName {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 auto;
+}
+
+.planImage {
+    display: block;
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+}
+
+.planContent {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.planContent h2,
+.planContent p {
+    margin: 0;
+}
+
+.crossStack {
+    padding: 16px 0 0 0;
+      margin-bottom: 40px;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.crossImage {
+    display: block;
+    height: auto;
+}
+
+.crossImg {
+    position: absolute;
+    height: auto;
+}
+
+.coverTitleContainer{
+border-radius: 20px 20px 0 0;
+background: #E5E6EB;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+gap:16px;
+height: 49px;
+}
+
+.coverTitleContainer p{
+color: #344672;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.coverTitleContainer img{
+    width: 32px;
+    height: 32px;
+}
+
+.coverValues{
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+border-radius: 0 0 20px 20px;
+background: #EFF0F3;
+height: 95px;
+margin-bottom: 5px;
+}
+
+.coverImageWrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.coverImageWrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  border-left: 2px dashed #d0d0d0;
+  z-index: 0;
+}
+
+/* Hide line on first wrapper (no line before first icon) */
+.coverImageWrapper:first-child::before {
+  display: none;
+}
