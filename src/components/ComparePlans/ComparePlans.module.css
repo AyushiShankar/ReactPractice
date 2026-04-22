@@ -139,7 +139,52 @@ margin-bottom: 5px;
   z-index: 0;
 }
 
-/* Hide line on first wrapper (no line before first icon) */
+
 .coverImageWrapper:first-child::before {
   display: none;
+}
+
+.tooltipWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  padding-left: 4px;
+}
+
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  background-color: #d0d0d0;
+  color: black;
+  font-size: 12px;
+  text-align: left;
+  align-self: start;
+  padding: 24px 24px;
+  border-radius: 6px;
+  position: absolute;
+  top: 130%;
+  left: 130%;
+  transform: translateY(-50%);
+  z-index: 10;
+  transition: opacity 0.2s ease;
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 38%;
+  transform: rotate(-90deg);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #d0d0d0 transparent;
+}
+
+.tooltipWrapper:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
 }
