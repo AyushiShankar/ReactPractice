@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./styles.css";
 
 export default function SearchableDropdown({ options }) {
@@ -24,37 +24,35 @@ export default function SearchableDropdown({ options }) {
 
   const handleOptions = (val) => {
     setSelected(selected.filter((s) => s != val));
-  }
+  };
 
   const handleKeyDown = (e) => {
     if (!isOpen) return;
     if (e.key === "ArrowDown") {
       e.preventDefault();
       setHighlightedIndex((prev) =>
-        prev + 1 >= availableOptions.length ? 0 : prev + 1);
-
-    }
-    else if (e.key === "ArrowUp") {
+        prev + 1 >= availableOptions.length ? 0 : prev + 1
+      );
+    } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setHighlightedIndex((prev) =>
-        prev - 1 < 0 ? availableOptions.length - 1 : prev - 1);
-    }
-    else if (e.key === "Enter") {
+        prev - 1 < 0 ? availableOptions.length - 1 : prev - 1
+      );
+    } else if (e.key === "Enter") {
       e.preventDefault();
       const opt = availableOptions[highlightedIndex];
       if (opt) {
         handleSelect(opt.value);
       }
     }
-
   };
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!dropdownRef.current.contains(e.target)) setIsOpen(false);
-    }
+    };
     document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside)
+    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
   useEffect(() => {
@@ -68,9 +66,14 @@ export default function SearchableDropdown({ options }) {
           const label = options.find((o) => o.value === s)?.label;
           return (
             <span className="tag" key={s} data-testid={`selected-tag-${s}`}>
-              <button onClick={() => handleOptions(s)} data-testid={`remove-tag-${s}`}>{label}&nbsp;*</button>
+              <button
+                onClick={() => handleOptions(s)}
+                data-testid={`remove-tag-${s}`}
+              >
+                {label}&nbsp;*
+              </button>
             </span>
-          )
+          );
         })}
       </div>
 
@@ -87,23 +90,26 @@ export default function SearchableDropdown({ options }) {
         onKeyDown={handleKeyDown}
       />
 
-      {isOpen && (<ul className="dropdown" data-testid="dropdown-container">
-        {availableOptions.map((opt, index) => (
-          <li
-            key={opt.value}
-            data-testid={`dropdown-option-${opt.value}`}
-            className={`dropdown-option ${index === highlightedIndex ? "highlighted" : " "}`}
-            ref={index === highlightedIndex ? highlightRef : null}
-            onClick={() => handleSelect(opt.value)}
-          >
-            {opt.label}
-          </li>
-        ))}
-        {availableOptions.length === 0 && (
-          <li className="no-options">No options</li>
-        )}
-      </ul>)
-      }
+      {isOpen && (
+        <ul className="dropdown" data-testid="dropdown-container">
+          {availableOptions.map((opt, index) => (
+            <li
+              key={opt.value}
+              data-testid={`dropdown-option-${opt.value}`}
+              className={`dropdown-option ${
+                index === highlightedIndex ? "highlighted" : " "
+              }`}
+              ref={index === highlightedIndex ? highlightRef : null}
+              onClick={() => handleSelect(opt.value)}
+            >
+              {opt.label}
+            </li>
+          ))}
+          {availableOptions.length === 0 && (
+            <li className="no-options">No options</li>
+          )}
+        </ul>
+      )}
     </div>
   );
 }

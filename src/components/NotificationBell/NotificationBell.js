@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./styles.css";
 
 const notifications = [
@@ -67,23 +67,20 @@ export default function NotificationBell() {
           : notification
       )
     );
-  }
+  };
 
   const handleMarkAllAsRead = () => {
     setNotificationList((prev) =>
       prev.map((notification) => ({
-
-        ...notification, isRead: true
-      })
-      )
+        ...notification,
+        isRead: true,
+      }))
     );
   };
-
 
   const formatTimestamp = (timestamp) => {
     return timestamp;
   };
-
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -146,8 +143,9 @@ export default function NotificationBell() {
                 notificationList.map((notification) => (
                   <div
                     key={notification.id}
-                    className={`notification-item ${notification.isRead ? "read" : "unread"
-                      }`}
+                    className={`notification-item ${
+                      notification.isRead ? "read" : "unread"
+                    }`}
                     onClick={() => handleNotificationClick(notification.id)}
                     data-testid="notification-item"
                   >

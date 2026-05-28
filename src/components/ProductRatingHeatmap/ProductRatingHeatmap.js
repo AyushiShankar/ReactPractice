@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./ProductRatingHeatmap.module.css";
 
 const products = [
@@ -153,22 +153,32 @@ export default function ProductRatingHeatmap() {
 
   // TODO: Implement renderStars function
   const renderStars = (rating) => {
-
     const stars = [];
     const fullStar = Math.floor(rating);
     const halfStar = rating % 1 !== 0;
 
     for (let i = 0; i < fullStar; i++) {
-      stars.push(<span key={i} className="star filled">STAR</span>);
+      stars.push(
+        <span key={i} className="star filled">
+          STAR
+        </span>
+      );
     }
 
     if (halfStar) {
-      stars.push(<span key="half" className="star half">St</span>);
-
+      stars.push(
+        <span key="half" className="star half">
+          St
+        </span>
+      );
     }
     const empty = 5 - Math.ceil(rating);
     for (let i = 0; i < empty; i++) {
-      stars.push(<span key={i} className="star filled">NOSTAR</span>);
+      stars.push(
+        <span key={i} className="star filled">
+          NOSTAR
+        </span>
+      );
     }
 
     return stars;

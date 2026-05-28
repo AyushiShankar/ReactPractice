@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const ZigzagString = () => {
   const [data, setData] = useState("");
   const [final, setFinal] = useState("");
 
-
   const handleString = (value) => {
-
-    const arr = value.split(',').map((s) => s.trim());
+    const arr = value.split(",").map((s) => s.trim());
     const length = arr.length;
     for (let i = 0; i < length; i++) {
       if (i % 2 != 0) {
@@ -15,7 +13,7 @@ const ZigzagString = () => {
       }
     }
     setFinal(arr.join(""));
-  }
+  };
 
   return (
     <div>

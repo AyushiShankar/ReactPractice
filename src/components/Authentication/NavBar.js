@@ -1,12 +1,8 @@
-import React, { useContext } from 'react';
-import { UserContext } from './userContext';
+import { useContext } from "react";
+import { UserContext } from "./userContext";
 
 const Navbar = () => {
-
   const { handleToggle, toggle } = useContext(UserContext);
-
-
-
 
   return (
     <nav>
