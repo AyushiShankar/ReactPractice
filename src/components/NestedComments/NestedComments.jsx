@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./styles.css";
 
 const mockComments = [
@@ -39,32 +39,30 @@ export default function CommentApp() {
       id: Date.now(),
       text: val,
       replies: [],
-
     };
 
     const addNestedReply = (commentList) => {
       return commentList.map((comment) => {
         if (comment.id === parentId) {
-
-          return { ...comment, replies: [...comment.replies, newReply] }
+          return { ...comment, replies: [...comment.replies, newReply] };
         }
-        return { ...comment, replies: addNestedReply(comment.replies) }
-
+        return { ...comment, replies: addNestedReply(comment.replies) };
       });
     };
 
-    setComments(prev => addNestedReply(prev))
+    setComments((prev) => addNestedReply(prev));
   };
 
   const addComment = (val) => {
     if (!val) return;
-    setComments((prev) =>
-      [...prev,
+    setComments((prev) => [
+      ...prev,
       {
         id: Date.now(),
         text: val.trim(),
         replies: [],
-      }]);
+      },
+    ]);
 
     setNewComment("");
   };
@@ -79,41 +77,43 @@ export default function CommentApp() {
         setReplyText("");
         setShowReplyInput(false);
       }
-
     };
 
     return (
       <div className="comment" data-testid={`comment-${comment.id}`}>
         <div>{comment.text}</div>
-        <button onClick={() => setShowReplyInput(!showReplyInput)}
+        <button
+          onClick={() => setShowReplyInput(!showReplyInput)}
           className="reply-btn"
-          data-testid={`reply-btn-${comment.id}`}>
+          data-testid={`reply-btn-${comment.id}`}
+        >
           Add a reply
         </button>
 
-        {
-          showReplyInput && (
-            <div className="reply-box">
-              <input
-                type="text"
-                data-testid={`reply-input-${comment.id}`}
-                value={replyText}
-                onChange={(e) => setReplyText(e.target.value)}
-                placeholder="Type your reply..."
-              />
-              <button
-                data-testid={`submit-reply-${comment.id}`}
-                onClick={() => handleReply(replyText, comment.id)}>Submit</button>
-            </div>
-          )
-        }
+        {showReplyInput && (
+          <div className="reply-box">
+            <input
+              type="text"
+              data-testid={`reply-input-${comment.id}`}
+              value={replyText}
+              onChange={(e) => setReplyText(e.target.value)}
+              placeholder="Type your reply..."
+            />
+            <button
+              data-testid={`submit-reply-${comment.id}`}
+              onClick={() => handleReply(replyText, comment.id)}
+            >
+              Submit
+            </button>
+          </div>
+        )}
 
         <div className="replies">
           {comment.replies?.map((reply) => (
             <Comment key={reply.id} comment={reply} />
           ))}
         </div>
-      </div >
+      </div>
     );
   };
 
@@ -128,14 +128,17 @@ export default function CommentApp() {
           data-testid="new-comment-input"
           placeholder="Type a comment..."
         />
-        <button data-testid="add-comment-btn"
-          onClick={() => addComment(newComment)}>Add Comment</button>
+        <button
+          data-testid="add-comment-btn"
+          onClick={() => addComment(newComment)}
+        >
+          Add Comment
+        </button>
       </div>
 
       {comments.map((comment) => (
         <Comment key={comment.id} comment={comment} />
       ))}
     </div>
-
   );
 }

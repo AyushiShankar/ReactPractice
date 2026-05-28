@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import './Accordian.module.css';
+import "./Accordian.module.css";
 import { useNavigate } from "react-router-dom";
 
 function Accordion() {

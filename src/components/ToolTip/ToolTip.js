@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import './styles.css';
+import { Component } from "react";
+import "./styles.css";
 
 class Tooltip extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeIndex: null
-
+      activeIndex: null,
     };
   }
   handleMouseEnter = (index) => {
@@ -18,9 +17,9 @@ class Tooltip extends Component {
 
   render() {
     const icons = [
-      { emoji: '🏠', label: 'Home' },
-      { emoji: '📧', label: 'Email' },
-      { emoji: '⚙️', label: 'Settings' }
+      { emoji: "🏠", label: "Home" },
+      { emoji: "📧", label: "Email" },
+      { emoji: "⚙️", label: "Settings" },
     ];
 
     return (
@@ -33,8 +32,12 @@ class Tooltip extends Component {
             onMouseLeave={this.handleMouseLeave}
           >
             <span>{icon.emoji}</span>
-            {this.state.activeIndex === index &&
-              (<div className="tooltip-box" key={index}>{icon.label}</div>)}</div>
+            {this.state.activeIndex === index && (
+              <div className="tooltip-box" key={index}>
+                {icon.label}
+              </div>
+            )}
+          </div>
         ))}
       </div>
     );

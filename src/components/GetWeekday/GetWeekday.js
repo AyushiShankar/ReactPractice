@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./styles.css";
 
 export default function GetWeekday() {
@@ -8,7 +8,9 @@ export default function GetWeekday() {
 
   const handleFindDay = (value) => {
     setDay("");
-    if (!value) { return setValid(false) };
+    if (!value) {
+      return setValid(false);
+    }
     const d1 = new Date(value);
     let count = d1.getDay();
     switch (count) {
@@ -38,8 +40,7 @@ export default function GetWeekday() {
     }
     setValid(true);
     return;
-
-  }
+  };
 
   return (
     <div className="container">
@@ -53,9 +54,12 @@ export default function GetWeekday() {
       <button data-testid="find-day-btn" onClick={() => handleFindDay(date)}>
         Find Day
       </button>
-      {valid && <p className="result" data-testid="result">{`This date falls on ${day}`}</p>
-      }
-
+      {valid && (
+        <p
+          className="result"
+          data-testid="result"
+        >{`This date falls on ${day}`}</p>
+      )}
     </div>
   );
 }

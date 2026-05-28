@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./AsteriskFieldValidation.module.css";
 
 function AsteriskFieldValidation() {
@@ -6,7 +6,6 @@ function AsteriskFieldValidation() {
   const [loc, setLoc] = useState("");
   const [error, setError] = useState({ name: "", loc: "" });
   const [submit, setSubmit] = useState("");
-
 
   function handleForm(e) {
     e.preventDefault();
@@ -23,12 +22,9 @@ function AsteriskFieldValidation() {
 
     if (!newError.name && !newError.loc) {
       setSubmit(`Submitted Successfully!\nName: ${name}\nLocation: ${loc}`);
-    }
-    else {
+    } else {
       setError(newError);
     }
-
-
   }
 
   return (
@@ -48,8 +44,11 @@ function AsteriskFieldValidation() {
             onChange={(e) => setName(e.target.value)}
             value={name}
           />
-          {error.name && <p className="error"
-            data-testid="name-error">{error.name}</p>}
+          {error.name && (
+            <p className="error" data-testid="name-error">
+              {error.name}
+            </p>
+          )}
         </div>
 
         <div className="input-group">
@@ -61,22 +60,31 @@ function AsteriskFieldValidation() {
             className="input"
             data-testid="location-input"
             type="text"
-            data-testid="location-input"
             placeholder="Enter your location"
             onChange={(e) => setLoc(e.target.value)}
             value={loc}
           />
-          {error.loc && <p data-testid="location-error" className="error">{error.loc}</p>}
+          {error.loc && (
+            <p data-testid="location-error" className="error">
+              {error.loc}
+            </p>
+          )}
         </div>
 
-        <button type="submit" className="submit-button"
-          data-testid="submit-button">
+        <button
+          type="submit"
+          className="submit-button"
+          data-testid="submit-button"
+        >
           Submit
         </button>
       </form>
-      {submit && (<pre data-testid="success-message" classname="success-message">{submit}</pre>)
-      }
-    </div >
+      {submit && (
+        <pre data-testid="success-message" classname="success-message">
+          {submit}
+        </pre>
+      )}
+    </div>
   );
 }
 

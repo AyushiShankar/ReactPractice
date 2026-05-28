@@ -1,5 +1,5 @@
 // PaginatedBookmarkList.js
-import React, { useState } from "react";
+import { useState } from "react";
 
 const ARTICLES_PER_PAGE = 5;
 

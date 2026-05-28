@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./styles.css";
 
 export default function PriceRangeSlider({ MIN = 0, MAX = 10000, STEP = 100 }) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import "./styles.css";
 
@@ -24,9 +24,10 @@ function TogglePassword() {
         />
         <span
           className="icon"
-          data-testid="toggle-icon" onClick={handlePassword}
-        >{isVisible ? <Eye size={18} /> :
-          <EyeOff size={18} />}
+          data-testid="toggle-icon"
+          onClick={handlePassword}
+        >
+          {isVisible ? <Eye size={18} /> : <EyeOff size={18} />}
         </span>
       </div>
       <span className="visibility-label" data-testid="visibility-label">

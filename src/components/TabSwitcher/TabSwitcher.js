@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./TabSwitcher.module.css";
 
 // Sample tab data
@@ -9,21 +9,28 @@ const tabs = [
 ];
 
 export default function TabSwitcher() {
-
   const [isActive, setIsActive] = useState("home");
-
 
   return (
     <div className="tab-switcher">
       <h1>Tab Switcher</h1>
       <div className="tab-buttons">
-        {tabs.map((tab, id) =>
-          <button key={id} data-testid={`tab-button-${tab.id}`} onClick={() => setIsActive(tab.id)} className={isActive === tab.id ? "active" : null}>{tab.label}</button>)}
+        {tabs.map((tab, id) => (
+          <button
+            key={id}
+            data-testid={`tab-button-${tab.id}`}
+            onClick={() => setIsActive(tab.id)}
+            className={isActive === tab.id ? "active" : null}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
       <div className="tab-content" data-testid="tab-content">
-        {tabs.map((tab, id) => (isActive === tab.id && <p key={id}>{tab.content}</p>)
+        {tabs.map(
+          (tab, id) => isActive === tab.id && <p key={id}>{tab.content}</p>
         )}
       </div>
-    </div >
+    </div>
   );
 }

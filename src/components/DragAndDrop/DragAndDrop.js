@@ -1,18 +1,14 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import "./styles.css";
 
 // Sample initial data
 const initialData = {
-  "todo": [
+  todo: [
     { id: "task-1", label: "Task 1" },
-    { id: "task-2", label: "Task 2" }
+    { id: "task-2", label: "Task 2" },
   ],
-  "in progress": [
-    { id: "task-3", label: "Task 3" }
-  ],
-  "done": [
-    { id: "task-4", label: "Task 4" }
-  ]
+  "in progress": [{ id: "task-3", label: "Task 3" }],
+  done: [{ id: "task-4", label: "Task 4" }],
 };
 
 export default function KanbanBoard() {
@@ -24,10 +20,8 @@ export default function KanbanBoard() {
   const [newTaskLabel, setNewTaskLabel] = useState("");
   const enterPressedRef = useRef(false);
 
-
   const handleDragStart = (task) => {
     setDraggedTask(task);
-
   };
 
   const handleDrop = (columnId) => {
@@ -57,13 +51,14 @@ export default function KanbanBoard() {
     setColumns((prev) => {
       const updated = { ...prev };
       for (const key in updated) {
-        updated[key] = updated[key].map((t) => t.id === taskId ? { ...t, label: editingTaskLabel } : t);
+        updated[key] = updated[key].map((t) =>
+          t.id === taskId ? { ...t, label: editingTaskLabel } : t
+        );
       }
       return updated;
-    })
+    });
     setEditingTaskId(null);
     setEditingTaskLabel("");
-
   };
 
   const handleEditKeyPress = (e, taskId) => {
@@ -76,11 +71,10 @@ export default function KanbanBoard() {
     setColumns((prev) => {
       const updated = { ...prev };
       for (const key in updated) {
-        updated[key] = updated[key].filter((t) => t.id !== taskId)
+        updated[key] = updated[key].filter((t) => t.id !== taskId);
       }
       return updated;
     });
-
   };
 
   const addNewTaskInline = (columnId) => {
@@ -97,7 +91,8 @@ export default function KanbanBoard() {
     const newTask = { id: newTaskId, label: newTaskLabel };
 
     setColumns((prev) => ({
-      ...prev, [columnId]: [...prev[columnId], newTask],
+      ...prev,
+      [columnId]: [...prev[columnId], newTask],
     }));
     setIsAddingNewTask(false);
     setNewTaskLabel("");
@@ -118,30 +113,41 @@ export default function KanbanBoard() {
               {col === "todo"
                 ? "To Do"
                 : col === "in progress"
-                  ? "In Progress"
-                  : "Done"}
+                ? "In Progress"
+                : "Done"}
             </h4>
             {columns[col].map((task) => (
               <div
                 key={task.id}
                 className="task"
                 draggable
-                onDragStart={() => handleDragStart(task)}>
+                onDragStart={() => handleDragStart(task)}
+              >
                 {editingTaskId === task.id ? (
-                  <input type="text"
+                  <input
+                    type="text"
                     value={editingTaskLabel}
                     onChange={(e) => setEditingTaskLabel(e.target.value)}
                     onBlur={() => saveEditedTask(task.id)}
                     onKeyDown={(e) => handleEditKeyPress(e, task.id)}
                     autoFocus
-                    clasName="task-edit-input" />
+                    clasName="task-edit-input"
+                  />
                 ) : (
                   <>
-                    <span className="task-label"
-                      onClick={() => handleLabelClick(task)}>{task.label}
+                    <span
+                      className="task-label"
+                      onClick={() => handleLabelClick(task)}
+                    >
+                      {task.label}
                     </span>
-                    <button className="icon-button delete-btn" onClick={() => deleteTask(task.id)}
-                      title="Delete task">-</button>
+                    <button
+                      className="icon-button delete-btn"
+                      onClick={() => deleteTask(task.id)}
+                      title="Delete task"
+                    >
+                      -
+                    </button>
                   </>
                 )}
               </div>
@@ -149,8 +155,10 @@ export default function KanbanBoard() {
 
             {col === "todo" && (
               <div className="add-task-inline">
-                {isAddingNewTask ?
-                  <input classname="add-task-input-inline" placeholder="Enter new task.."
+                {isAddingNewTask ? (
+                  <input
+                    classname="add-task-input-inline"
+                    placeholder="Enter new task.."
                     type="text"
                     value={newTaskLabel}
                     onChange={(e) => setNewTaskLabel(e.target.value)}
@@ -159,19 +167,24 @@ export default function KanbanBoard() {
                       if (e.key === "Enter") {
                         enterPressedRef.current = true;
                         addNewTaskInline(col);
-                        e.target.blur();        
+                        e.target.blur();
                       }
                     }}
-                    autoFocus /> :
-                  <button className="add-task-placeholder"
-                    onClick={() => setIsAddingNewTask(true)}>+ Add a task</button>}
+                    autoFocus
+                  />
+                ) : (
+                  <button
+                    className="add-task-placeholder"
+                    onClick={() => setIsAddingNewTask(true)}
+                  >
+                    + Add a task
+                  </button>
+                )}
               </div>
             )}
-
-
           </div>
         ))}
       </div>
-    </div >
+    </div>
   );
 }

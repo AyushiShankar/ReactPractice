@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function Greeting() {
   const [text, setText] = useState("");
@@ -34,7 +34,9 @@ export default function Greeting() {
       }}
     >
       <p data-testid="greeting">{greet}</p>
-      <time data-testid="time" className="updated-time">{text}</time>
+      <time data-testid="time" className="updated-time">
+        {text}
+      </time>
     </div>
   );
 }

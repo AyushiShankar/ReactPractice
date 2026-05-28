@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 import "./PasswordStrength.module.css";
 
 export const checkPasswordStrength = (value) => {
@@ -19,21 +19,30 @@ export const checkPasswordStrength = (value) => {
 };
 
 const PasswordStrength = () => {
-
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
 
   const handleCheck = () => {
     setMessage(checkPasswordStrength(password));
-  }
+  };
 
   return (
     <div>
       <h2>Password Strength Checker</h2>
-      <input className="password" data-testid="password" placeholder="Enter password"
-        onChange={(e) => setPassword(e.target.value)} />
-      <button className="check-btn" onClick={handleCheck}>Check Strength</button>
-      {message && <p >Strength: <strong>{message}</strong></p>}
+      <input
+        className="password"
+        data-testid="password"
+        placeholder="Enter password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button className="check-btn" onClick={handleCheck}>
+        Check Strength
+      </button>
+      {message && (
+        <p>
+          Strength: <strong>{message}</strong>
+        </p>
+      )}
     </div>
   );
 };

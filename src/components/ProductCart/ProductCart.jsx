@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./styles.css";
 
 const ProductCart = ({ initialProducts }) => {
@@ -12,14 +12,11 @@ const ProductCart = ({ initialProducts }) => {
     pdName: "",
     price: "",
     quantity: "",
-    description: ""
+    description: "",
   });
 
   const discountCalculation = () => {
-    const total = cart.reduce(
-      (sum, item) => sum + item.price * item.qty,
-      0
-    );
+    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
     const discountedAmount = total * 0.5;
     const finalAmount = (total - discountedAmount).toFixed(2);
@@ -29,23 +26,24 @@ const ProductCart = ({ initialProducts }) => {
 
   const updateQty = (id, delta) => {
     if (delta === "inc") {
-
       setCart((prev) =>
         prev.map((item) =>
-          item.id === id ? { ...item, qty: item.qty + 1 } : item));
-    }
-    else {
-
+          item.id === id ? { ...item, qty: item.qty + 1 } : item
+        )
+      );
+    } else {
       setCart((prev) =>
-        prev.map((item) =>
-          item.id === id ? { ...item, qty: item.qty - 1 } : item).filter((item) => item.qty > 0));
+        prev
+          .map((item) =>
+            item.id === id ? { ...item, qty: item.qty - 1 } : item
+          )
+          .filter((item) => item.qty > 0)
+      );
     }
-
   };
 
   const removeProduct = (id) => {
-    setCart((prev) =>
-      prev.filter((item) => item.id !== id));
+    setCart((prev) => prev.filter((item) => item.id !== id));
 
     if (couponNo === "GRAB50") {
       discountCalculation();
@@ -58,7 +56,7 @@ const ProductCart = ({ initialProducts }) => {
       setDiscount("");
       setMessage("");
     }
-  }, [cart])
+  }, [cart]);
 
   // TODO: Implement coupon functionality
   const applyCoupon = (coupon) => {
@@ -75,19 +73,21 @@ const ProductCart = ({ initialProducts }) => {
   };
 
   const handleCart = () => {
-    setCart((prev) => [...prev, {
-      id: Date.now(),
-      name: form.pdName,
-      price: form.price,
-      description: form.description,
-      qty: form.quantity || 1,
-
-    }]);
+    setCart((prev) => [
+      ...prev,
+      {
+        id: Date.now(),
+        name: form.pdName,
+        price: form.price,
+        description: form.description,
+        qty: form.quantity || 1,
+      },
+    ]);
     setForm({
       pdName: "",
       price: "",
       quantity: "",
-      description: ""
+      description: "",
     });
   };
 
@@ -107,7 +107,8 @@ const ProductCart = ({ initialProducts }) => {
         <div className="add-product-grid">
           <div>
             <label className="form-label">Product Name:</label>
-            <input className="input-field"
+            <input
+              className="input-field"
               type="text"
               data-testid="new-product-name"
               name="pdName"
@@ -115,25 +116,32 @@ const ProductCart = ({ initialProducts }) => {
               onChange={(e) =>
                 setForm((prev) => ({
                   ...prev,
-                  [e.target.name]: e.target.value
+                  [e.target.name]: e.target.value,
                 }))
-              } />
+              }
+            />
           </div>
           <div>
             <label className="form-label">Price (₹):</label>
-            <input className="input-field" type="Number"
+            <input
+              className="input-field"
+              type="Number"
               data-testid="new-product-price"
               name="price"
               value={form.price}
               onChange={(e) =>
                 setForm((prev) => ({
                   ...prev,
-                  [e.target.name]: Number(e.target.value)
+                  [e.target.name]: Number(e.target.value),
                 }))
-              } />
+              }
+            />
           </div>
-          <div> <label className="form-label">Quantity:</label>
-            <input className="input-field"
+          <div>
+            {" "}
+            <label className="form-label">Quantity:</label>
+            <input
+              className="input-field"
               type="Number"
               data-testid="new-product-qty"
               name="quantity"
@@ -141,27 +149,39 @@ const ProductCart = ({ initialProducts }) => {
               onChange={(e) =>
                 setForm((prev) => ({
                   ...prev,
-                  [e.target.name]: Number(e.target.value)
+                  [e.target.name]: Number(e.target.value),
                 }))
-              } /></div>
-          <div><label className="form-label">Description:</label>
-            <input className="input-field" type="text"
+              }
+            />
+          </div>
+          <div>
+            <label className="form-label">Description:</label>
+            <input
+              className="input-field"
+              type="text"
               name="description"
               data-testid="new-product-description"
               value={form.description}
               onChange={(e) =>
                 setForm((prev) => ({
                   ...prev,
-                  [e.target.name]: e.target.value
+                  [e.target.name]: e.target.value,
                 }))
-              } /></div>
+              }
+            />
+          </div>
 
-          <button className="btn add-btn" onClick={handleCart}
-            data-testid="add-product-button">Add Button</button></div>
-
+          <button
+            className="btn add-btn"
+            onClick={handleCart}
+            data-testid="add-product-button"
+          >
+            Add Button
+          </button>
+        </div>
       </div>
 
-      <div data-testid="cart-product-list" >
+      <div data-testid="cart-product-list">
         {cart.map((item) => (
           <div key={item.id} className="product-card">
             <div className="product-info">
@@ -175,8 +195,13 @@ const ProductCart = ({ initialProducts }) => {
 
               <div className="qty-section">
                 <span>Quantity: </span>
-                <button className="btn dec-btn" onClick={() => updateQty(item.id, "dec")}
-                  disabled={item.qty === 1}>-</button>
+                <button
+                  className="btn dec-btn"
+                  onClick={() => updateQty(item.id, "dec")}
+                  disabled={item.qty === 1}
+                >
+                  -
+                </button>
                 <input
                   data-testid="product-qty"
                   type="number"
@@ -185,7 +210,12 @@ const ProductCart = ({ initialProducts }) => {
                   className="qty-input"
                 />
                 {/* TODO: Add functionality to increase quantity */}
-                <button className="btn inc-btn" onClick={() => updateQty(item.id, "inc")}>+</button>
+                <button
+                  className="btn inc-btn"
+                  onClick={() => updateQty(item.id, "inc")}
+                >
+                  +
+                </button>
               </div>
 
               <p
@@ -197,8 +227,11 @@ const ProductCart = ({ initialProducts }) => {
             </div>
 
             {/* TODO: Add functionality to remove product */}
-            <button data-testid="remove-product-button" className="btn remove-btn"
-              onClick={() => removeProduct(item.id)}>
+            <button
+              data-testid="remove-product-button"
+              className="btn remove-btn"
+              onClick={() => removeProduct(item.id)}
+            >
               Remove
             </button>
           </div>
@@ -226,8 +259,11 @@ const ProductCart = ({ initialProducts }) => {
               Apply
             </button>
           </div>
-          {message && cart.length > 0 && <p className="coupon-success"
-            data-testid="apply-coupon-message">{message}</p>}
+          {message && cart.length > 0 && (
+            <p className="coupon-success" data-testid="apply-coupon-message">
+              {message}
+            </p>
+          )}
         </div>
 
         <div className="total-section">
@@ -241,23 +277,27 @@ const ProductCart = ({ initialProducts }) => {
             </span>
           </div>
 
-
-
           <div className="total-row discount-row">
-            {couponNo && cart.length > 0 && discount && <div className="discount-row">
-              <span>DISCOUNT (GRAB50):</span>
-              <span>{`₹ ${discount}`}</span>
-            </div>}
-            <div data-testid="total-amount" className="total-amount final-total">
+            {couponNo && cart.length > 0 && discount && (
+              <div className="discount-row">
+                <span>DISCOUNT (GRAB50):</span>
+                <span>{`₹ ${discount}`}</span>
+              </div>
+            )}
+            <div
+              data-testid="total-amount"
+              className="total-amount final-total"
+            >
               <span>Total:</span>
-              <span>{discount ? `₹${discount}` :
-                `₹
+              <span>
+                {discount
+                  ? `₹${discount}`
+                  : `₹
               ${cart
-                  .reduce((sum, item) => sum + item.price * item.qty, 0)
-                  .toFixed(2)}`}
+                .reduce((sum, item) => sum + item.price * item.qty, 0)
+                .toFixed(2)}`}
               </span>
             </div>
-
           </div>
         </div>
       </div>

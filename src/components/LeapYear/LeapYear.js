@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function LeapYear() {
   const [year, setYear] = useState("");
@@ -15,7 +15,7 @@ export default function LeapYear() {
     } else {
       setIsLeap(false);
       setMessage(`${year} is not a Leap Year`);
-    };
+    }
   }
 
   return (
@@ -32,10 +32,21 @@ export default function LeapYear() {
       <button data-testid="check-btn" onClick={() => handleYear(year)}>
         Check
       </button>
-      {isleap && (<p className="result" data-testid="result">{message}</p>)}
-      {!isleap && year && <p className="result" data-testid="result">{message}</p>}
-      {!year && <p className="error-msg"
-        data-testid="error-msg">{message}</p>}
+      {isleap && (
+        <p className="result" data-testid="result">
+          {message}
+        </p>
+      )}
+      {!isleap && year && (
+        <p className="result" data-testid="result">
+          {message}
+        </p>
+      )}
+      {!year && (
+        <p className="error-msg" data-testid="error-msg">
+          {message}
+        </p>
+      )}
     </div>
   );
 }
