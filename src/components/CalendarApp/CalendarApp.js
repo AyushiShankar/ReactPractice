@@ -54,25 +54,25 @@ const CalendarApp = () => {
   };
 
   const saveEvent = () => {
-
     setValidationError("");
     if (!eventTitle.trim()) {
-      setValidationError(
-        "Please enter event title");
+      return setValidationError("Please enter event title");
     }
+
     if (!eventDate) {
-      setValidationError("Please select event date");
+      return setValidationError("Please select event date");
     }
 
     const newEvent = {
       id: Date.now(),
       title: eventTitle,
-      date: eventDate
-
+      date: eventDate,
     };
     setEvents((prev) => ({
-      ...prev, [eventDate]: [...(prev[eventDate] || []), newEvent],
+      ...prev,
+      [eventDate]: [...(prev[eventDate] || []), newEvent],
     }));
+    closeModal();
   };
 
   const deleteEvent = (eventId, date) => {
@@ -167,19 +167,24 @@ const CalendarApp = () => {
 
       {showModal && (
         <div data-testid="event-modal" className="modal-overlay">
-          <span className="modal">
+          <div className="modal">
             <div className="modal-header">
-              <p>Add Event</p>
-              <button className="close-btn" onClick={closeModal}>*</button>
+              <h3>Add Event</h3>
+              <button
+                className="close-btn"
+                onClick={closeModal}
+                data-testid="close-modal-btn"
+              >
+                *
+              </button>
             </div>
             {validationError && (
-              <div data-testid="validation-error"
-                className="error-message"
-              >
-                <p>{validationError}</p></div>
+              <div data-testid="validation-error" className="error-message">
+                <h3>{validationError}</h3>
+              </div>
             )}
             <div className="modal-body">
-              <form className="form-group">
+              <div className="form-group">
                 <label>Event Title:</label>
                 <input
                   data-testid="event-title-input"
@@ -196,18 +201,21 @@ const CalendarApp = () => {
                   value={eventDate}
                   onChange={(e) => setEventDate(e.target.value)}
                 />
-                <span className="modal-footer">
-                  <button data-testid="save-event-btn"
-                    className="save-btn" onClick={() => saveEvent(eventTitle, eventDate)}>
+                <div className="modal-footer">
+                  <button
+                    data-testid="save-event-btn"
+                    className="save-btn"
+                    onClick={() => saveEvent(eventTitle, eventDate)}
+                  >
                     Save Event
                   </button>
-                  <button
-                    className="cancel-btn" data-testid="close-modal-btn" onClick={closeModal}>
+                  <button className="cancel-btn" onClick={closeModal}>
                     Cancel
-                  </button></span>
-              </form>
+                  </button>
+                </div>
+              </div>
             </div>
-          </span>
+          </div>
         </div>
       )}
     </div>
