@@ -4,6 +4,7 @@
 // import UndoRedo from "./components/UndoRedo/UndoRedo";
 // import ComparePlans from "./components/ComparePlans/ComparePlans";
 import MatchPairGame from "./components/MathPairGame/MathPairGame";
+// import NestedCheckbox from "./components/NestedCheckbox/NestedCheckbox";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
     //   </Routes>
     // </BrowserRouter>
     <MatchPairGame />
+    // <NestedCheckbox />
   );
 }
 
