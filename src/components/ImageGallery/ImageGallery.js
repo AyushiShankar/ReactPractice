@@ -3,19 +3,14 @@ import "./styles.css";
 
 const ImageGallery = () => {
   const [url, setUrl] = useState("");
-  const [isOpen, setIsOpen] = useState({
+  const [modal, setModal] = useState({
     toShow: false,
     image: ""
   });
-  const [images, setImages] = useState([
-    {
-      url: "https://m.media-amazon.com/images/M/MV5BOGVkMTY3OTMtMjEwOC00MGVmLTlmNmItZmZhNDNhYTEzOTQ0XkEyXkFqcGc@.jpg",
-      id: 1,
-    },
-  ]);
+  const [images, setImages] = useState([]);
 
   const handleAddImage = () => {
-    if (!url) return;
+    if (!isValidImage(url)) return;
     const id = Date.now();
     setImages((prev) => [
       ...prev,
@@ -24,13 +19,15 @@ const ImageGallery = () => {
         id: id,
       },
     ]);
+    setUrl("");
   };
-
+  const isValidImage = (url) => {
+    return /\.(jpg|jpeg|png|gif|webp)$/i.test(url);
+  };
   const handleDeleteImages = (id) => {
-    setImages((prev) => prev.filter((image) => image.id === id));
+    setImages((prev) => prev.filter(image => image.id !== id));
   };
 
-  //https://m.media-amazon.com/images/M/MV5BOGVkMTY3OTMtMjEwOC00MGVmLTlmNmItZmZhNDNhYTEzOTQ0XkEyXkFqcGc@.jpg
   return (
     <div>
       <h1>Image Gallery Application</h1>
@@ -44,7 +41,7 @@ const ImageGallery = () => {
         <button onClick={handleAddImage}>Add Image</button>
       </div>
       <div>
-        {images.map((image) => (
+        {images.map((image, index) => (
           <div
             key={image.id}
             style={{
@@ -55,16 +52,19 @@ const ImageGallery = () => {
           >
             <img
               src={image.url}
-              alt={`Image ${image.id}`}
+              alt={`Gallery image ${index}`}
               style={{
                 width: "250px",
                 height: "400px",
                 objectFit: "cover",
                 display: "block",
               }}
-              onClick={() => setIsOpen({
-                toShow: true, image: image.url
-              })}
+              onClick={() =>
+                setModal({
+                  toShow: true,
+                  image: image.url,
+                })
+              }
             />
 
             <button
@@ -86,7 +86,8 @@ const ImageGallery = () => {
             </button>
           </div>
         ))}
-        {isOpen?.toShow && <div
+        {modal?.toShow && (<div
+          id="modal"
           style={{
             position: "fixed",
             top: 0,
@@ -99,16 +100,17 @@ const ImageGallery = () => {
             alignItems: "center",
             zIndex: 2,
           }}
-          onMouseDown={() => setIsOpen({
-            toShow: false, image: ""
-          })}>
-          <img src={isOpen.image} alt=""
+          onMouseDown={() => setModal((prev) => ({
+            toShow: false,
+            image: "",
+          }))}>
+          <img src={modal.image} alt=""
             style={{
               height: "80%",
               margin: "50px 50px",
             }}
             onMouseDown={(e) => e.stopPropagation()} />
-        </div>}
+        </div>)}
       </div>
     </div>
   );
